@@ -53,7 +53,6 @@ class GildedRose {
                 }
                 break;
             case "Sulfuras, Hand of Ragnaros":
-
                 break;
             case "Conjured Mana Cake":
                 if (item.quality > 0) {
@@ -65,7 +64,8 @@ class GildedRose {
                 if (item.sellIn < 0) {
                     if (item.quality > 0) {
                         item.quality = item.quality - 2;
-                    }}
+                    }
+                }
                 break;
             default:
                 if (item.quality > 0) {
