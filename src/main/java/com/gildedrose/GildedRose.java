@@ -8,9 +8,8 @@ class GildedRose {
     }
 
     public void updateQuality() {
-        for (int i = 0; i < items.length; i++) {
-            Item item = items[i];
-            doUpdate(items[i]);
+        for (Item item : items) {
+            doUpdate(item);
         }
     }
 
@@ -55,6 +54,18 @@ class GildedRose {
                 break;
             case "Sulfuras, Hand of Ragnaros":
 
+                break;
+            case "Conjured Mana Cake":
+                if (item.quality > 0) {
+                    item.quality = item.quality - 2;
+                }
+
+                item.sellIn = item.sellIn - 1;
+
+                if (item.sellIn < 0) {
+                    if (item.quality > 0) {
+                        item.quality = item.quality - 2;
+                    }}
                 break;
             default:
                 if (item.quality > 0) {
