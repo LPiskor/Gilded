@@ -3,11 +3,11 @@ package com.gildedrose;
 class GildedRose {
     Item[] items;
 
-    public GildedRose(Item[] items) {
+    GildedRose(Item[] items) {
         this.items = items;
     }
 
-    public void updateQuality() {
+    void updateQuality() {
         for (Item item : items) {
             doUpdate(item);
         }
@@ -16,17 +16,12 @@ class GildedRose {
     private void doUpdate(Item item) {
         switch (item.name) {
             case "Aged Brie":
-                if (item.quality < 50) {
-                    item.quality = item.quality + 1;
+                plusQuality(item, item.quality, 50, item.quality + 1);
 
-                }
-
-                item.sellIn = item.sellIn - 1;
+                endOfDay(item);
 
                 if (item.sellIn < 0) {
-                    if (item.quality < 50) {
-                        item.quality = item.quality + 1;
-                    }
+                    plusQuality(item, item.quality, 50, item.quality + 1);
                 }
                 break;
             case "Backstage passes to a TAFKAL80ETC concert":
@@ -34,52 +29,57 @@ class GildedRose {
                     item.quality = item.quality + 1;
 
                     if (item.sellIn < 11) {
-                        if (item.quality < 50) {
-                            item.quality = item.quality + 1;
-                        }
+                        plusQuality(item, item.quality, 50, item.quality + 1);
                     }
 
                     if (item.sellIn < 6) {
-                        if (item.quality < 50) {
-                            item.quality = item.quality + 1;
-                        }
+                        plusQuality(item, item.quality, 50, item.quality + 1);
                     }
                 }
 
-                item.sellIn = item.sellIn - 1;
+                endOfDay(item);
 
-                if (item.sellIn < 0) {
-                    item.quality = 0;
-                }
+                plusQuality(item, item.sellIn, 0, 0);
                 break;
             case "Sulfuras, Hand of Ragnaros":
                 break;
             case "Conjured Mana Cake":
-                if (item.quality > 0) {
-                    item.quality = item.quality - 2;
-                }
+                qualityLoss(item, 2);
 
-                item.sellIn = item.sellIn - 1;
+                endOfDay(item);
 
-                if (item.sellIn < 0) {
-                    if (item.quality > 0) {
-                        item.quality = item.quality - 2;
-                    }
-                }
+                outOfDate(item, 2);
                 break;
             default:
-                if (item.quality > 0) {
-                    item.quality = item.quality - 1;
-                }
+                qualityLoss(item, 1);
 
-                item.sellIn = item.sellIn - 1;
+                endOfDay(item);
 
-                if (item.sellIn < 0) {
-                    if (item.quality > 0) {
-                        item.quality = item.quality - 1;
-                    }
-                }
+                outOfDate(item, 1);
                 break;
+        }
+    }
+
+    private void qualityLoss(Item item, int i) {
+        if (item.quality > 0) {
+            item.quality = item.quality - i;
+        }
+    }
+
+    private void endOfDay(Item item) {
+        item.sellIn = item.sellIn - 1;
+    }
+
+    private void outOfDate(Item item, int a) {
+        if (item.sellIn < 0) {
+            qualityLoss(item, a);
+        }
+    }
+
+    private void plusQuality(Item item, int quality, int i, int i2) {
+        if (quality < i) {
+            item.quality = i2;
+
         }
     }
 
