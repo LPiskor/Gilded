@@ -32,9 +32,11 @@ class GildedRose {
     }
 
     private void BasicAndConjured(Item item, int i) {
-        ItemPattern.qualityLoss(item, i);
-        ItemPattern.endOfDay(item);
-        ItemPattern.outOfDate(item, i);
+        qualityLoss(item, i);
+
+        endOfDay(item);
+
+        outOfDate(item, i);
     }
 
     private void BackstagePasses(Item item) {
@@ -42,27 +44,50 @@ class GildedRose {
             item.quality = item.quality + 1;
 
             if (item.sellIn < 11) {
-                ItemPattern.plusQuality(item, item.quality, 50, item.quality + 1);
+                plusQuality(item, item.quality, 50, item.quality + 1);
             }
 
             if (item.sellIn < 6) {
-                ItemPattern.plusQuality(item, item.quality, 50, item.quality + 1);
+                plusQuality(item, item.quality, 50, item.quality + 1);
             }
         }
 
-        ItemPattern.endOfDay(item);
+        endOfDay(item);
 
-        ItemPattern.plusQuality(item, item.sellIn, 0, 0);
+        plusQuality(item, item.sellIn, 0, 0);
     }
 
     private void AgedBrie(Item item) {
-        ItemPattern.plusQuality(item, item.quality, 50, item.quality + 1);
+        plusQuality(item, item.quality, 50, item.quality + 1);
 
-        ItemPattern.endOfDay(item);
+        endOfDay(item);
 
         if (item.sellIn < 0) {
-            ItemPattern.plusQuality(item, item.quality, 50, item.quality + 1);
+            plusQuality(item, item.quality, 50, item.quality + 1);
         }
     }
+    private void qualityLoss(Item item, int i) {
+        if (item.quality > 0) {
+            item.quality = item.quality - i;
+        }
+    }
+
+    private void endOfDay(Item item) {
+        item.sellIn = item.sellIn - 1;
+    }
+
+    private void outOfDate(Item item, int a) {
+        if (item.sellIn < 0) {
+            qualityLoss(item, a);
+        }
+    }
+
+    private void plusQuality(Item item, int quality, int i, int i2) {
+        if (quality < i) {
+            item.quality = i2;
+
+        }
+    }
+
 
 }
