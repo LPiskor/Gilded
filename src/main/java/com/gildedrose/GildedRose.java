@@ -37,7 +37,6 @@ class GildedRose {
         endOfDay(item);
 
         outOfDate(item, i);
-        return;
     }
 
     private void BackstagePasses(Item item) {
@@ -56,7 +55,6 @@ class GildedRose {
         endOfDay(item);
 
         plusQuality(item, item.sellIn, 0, 0);
-        return;
     }
 
     private void AgedBrie(Item item) {
@@ -67,7 +65,6 @@ class GildedRose {
         if (item.sellIn < 0) {
             plusQuality(item, item.quality, 50, item.quality + 1);
         }
-        return;
     }
 
     private void qualityLoss(Item item, int i) {
