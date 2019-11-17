@@ -16,22 +16,22 @@ class GildedRose {
     private void doUpdate(Item item) {
         switch (item.name) {
             case "Aged Brie":
-                Aged_Brie(item);
+                AgedBrie(item);
                 break;
             case "Backstage passes to a TAFKAL80ETC concert":
-                Backstage_Passes(item);
+                BackstagePasses(item);
                 break;
             case "Sulfuras, Hand of Ragnaros":
                 break;
             case "Conjured Mana Cake":
-                Basic_And_Conjured(item, 2);
+                BasicAndConjured(item, 2);
                 break;
             default:
-                Basic_And_Conjured(item, 1);
+                BasicAndConjured(item, 1);
         }
     }
 
-    private void Basic_And_Conjured(Item item, int i) {
+    private void BasicAndConjured(Item item, int i) {
         qualityLoss(item, i);
 
         endOfDay(item);
@@ -39,7 +39,7 @@ class GildedRose {
         outOfDate(item, i);
     }
 
-    private void Backstage_Passes(Item item) {
+    private void BackstagePasses(Item item) {
         if (item.quality < 50) {
             item.quality = item.quality + 1;
 
@@ -57,7 +57,7 @@ class GildedRose {
         plusQuality(item, item.sellIn, 0, 0);
     }
 
-    private void Aged_Brie(Item item) {
+    private void AgedBrie(Item item) {
         plusQuality(item, item.quality, 50, item.quality + 1);
 
         endOfDay(item);
