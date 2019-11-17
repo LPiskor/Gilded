@@ -1,0 +1,11 @@
+language: java
+
+addons:
+  sonarcloud:
+    organization: "lpiskor"
+    token:
+      secure: 86d70860a3973aebe5977770862fc1aa6e04fbdc # encrypted value of your token
+
+script:
+  # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=LPiskor_Gilded
